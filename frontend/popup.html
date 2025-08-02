@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    :root {
+      --bg-color: #ffffff;
+      --text-color: #333;
+      --card-bg: #ffffff;
+      --table-bg: #fafafa;
+      --table-border: #ddd;
+    }
+
+    [data-theme="dark"] {
+      --bg-color: #1e1e1e;
+      --text-color: #f5f5f5;
+      --card-bg: #2c2c2c;
+      --table-bg: #333;
+      --table-border: #555;
+    }
+
+    body {
+      font-family: system-ui, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+    }
+
+    h3 {
+      margin-top: 0;
+      font-size: 18px;
+    }
+
+    .tabs {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .tab-button {
+      flex: 1;
+      margin: 0 5px;
+      padding: 10px;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      color: white;
+    }
+
+    #competitiveBtn { background-color: #1b4f5b; }
+    #crpBtn         { background-color: #d14a2e; }
+    #historyBtn     { background-color: #f79257; }
+
+    .spinner {
+      display: none;
+      margin: 10px auto;
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #555;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      animation: spin 0.8s linear infinite;
+    }
+
+    .sub-tabs {
+      display: none;
+      margin-top: 10px;
+    }
+
+    .sub-tab-button {
+      flex: 1;
+      padding: 8px;
+      background: #ececec;
+      border: 1px solid #ccc;
+      cursor: pointer;
+      text-align: center;
+      font-size: 13px;
+    }
+
+    .sub-tab-button.active {
+      background: #ccc;
+      font-weight: bold;
+    }
+
+    .sub-tab-content {
+      display: none;
+      margin-top: 5px;
+    }
+
+    .sub-tab-content.active {
+      display: block;
+    }
+
+    .scroll-wrapper {
+      overflow: scroll;
+      max-height: 300px;
+      max-width: 100%;
+      padding: 2px;
+    }
+
+    #graphImage1, #graphImage2 {
+      max-width: 500px;
+      max-height: 300px;
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    #graphImage1:hover,
+    #graphImage2:hover {
+      cursor: zoom-in;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.85);
+    }
+
+    .modal-content {
+      margin: auto;
+      display: block;
+      max-width: 90vw;
+      max-height: 90vh;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    }
+
+    .close {
+      position: absolute;
+      top: 12px;
+      right: 20px;
+      color: white;
+      font-size: 32px;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    .popup-container {
+      width: 360px;
+      height: auto;
+      max-height: 700px;
+      overflow-y: auto;
+      padding: 20px;
+      background-color: var(--card-bg);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      border-radius: 12px;
+      transition: height 0.3s ease, width 0.3s ease;
+    }
+  </style>
+</head>
+<body>
+  <div class="popup-container">
+    <h3>Pricing Insight Tool</h3>
+
+    <div class="tabs">
+      <button id="competitiveBtn" class="tab-button">Competitive Prices</button>
+      <button id="priceBtn" class="tab-button">Prices</button>
+      <button id="historyBtn" class="tab-button">Performance Trend</button>
+    </div>
+
+    <div class="spinner" id="spinner"></div>
+    <div id="output"></div>
+
+    <div class="sub-tabs" id="performanceSubTabs">
+      <div class="sub-tab-button active" data-tab="priceTab">Price Trend</div>
+      <div class="sub-tab-button" data-tab="gpTab">GP + Sales</div>
+    </div>
+
+    <div id="priceTab" class="sub-tab-content scroll-wrapper active">
+      <img id="graphImage1" src="" alt="" />
+    </div>
+
+    <div id="gpTab" class="sub-tab-content scroll-wrapper">
+      <img id="graphImage2" src="" alt="" />
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+
+  <!-- Graph Modal -->
+  <div id="graphModal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="modalImage" />
+  </div>
+</body>
+</html>
