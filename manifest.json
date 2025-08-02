@@ -1,0 +1,56 @@
+{
+  "manifest_version": 3,
+  "name": "Pricing Info Extension (Template)",
+  "key": "Extension key in order to keep a same extension ID if working locally",
+  "description": "Chrome Extension to fetch product info from a secure backend using Google OAuth",
+  "version": "1.0",
+
+  "permissions": [
+    "identity",
+    "activeTab",
+    "storage"
+  ],
+
+  "host_permissions": [
+    "https://your-backend-url.run.app/*"
+  ],
+
+  "oauth2": {
+    "client_id": "YOUR_CLIENT_ID.apps.googleusercontent.com",
+    "scopes": [
+      "openid",
+      "email",
+      "profile"
+    ]
+  },
+
+  "externally_connectable": {
+    "matches": [
+      "https://YOUR_EXTENSION_ID.chromiumapp.org/"
+    ]
+  },
+
+  "background": {
+    "service_worker": "background.js"
+  },
+
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "./icons/icon16.png",
+      "48": "./icons/icon48.png",
+      "128": "./icons/icon128.png"
+    }
+  },
+
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self';"
+  },
+
+  "web_accessible_resources": [
+    {
+      "resources": ["login.html"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
