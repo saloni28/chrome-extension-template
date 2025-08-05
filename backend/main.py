@@ -105,7 +105,7 @@ def get_price_history_sales():
         return jsonify({"error": str(e)}), 500
 
 # ---------------- Route 3: CRP Prices ----------------
-@app.route("/getCRPPrices", methods=["POST"])
+@app.route("/getotherPrices", methods=["POST"])
 def get_crp_prices():
     try:
         verify_google_identity_token(request)
