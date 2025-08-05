@@ -25,8 +25,8 @@ function sendRequest(action, url) {
         if (!hasTableData && !data?.price_chart && !data?.gp_chart) {
           outputDiv.innerHTML += `<p>⚠️ No usable data found.</p>`;
         }
-      } else if (action === "fetchCRPPrices" || action === "fetchCompetitivePrices") {
-        if (Array.isArray(data)) displayTable(data, action === "fetchCRPPrices" ? "CRP Prices" : "Competitive Prices");
+      } else if (action === "fetchotherPrices" || action === "fetchCompetitivePrices") {
+        if (Array.isArray(data)) displayTable(data, action === "fetchotherPrices" ? "other Prices" : "Competitive Prices");
       } else if (data?.error === "No data found") {
         outputDiv.innerHTML = "<p>No data found.</p>";
       } else {
@@ -38,9 +38,9 @@ function sendRequest(action, url) {
   });
 }
 
-function fetchCRPPrices() {
+function fetchotherPrices() {
   getCurrentTabUrl((url) => {
-    if (url) sendRequest("fetchCRPPrices", url);
+    if (url) sendRequest("fetchotherPrices", url);
   });
 }
 
@@ -159,12 +159,12 @@ document.addEventListener("DOMContentLoaded", () => {
     fetchCompetitivePrices();
   });
 
-  document.getElementById("crpBtn")?.addEventListener("click", () => {
+  document.getElementById("otherBtn")?.addEventListener("click", () => {
     clearGraphs();
     subTabs.style.display = "none";
     container.style.width = "360px";
     container.style.height = "auto";
-    fetchCRPPrices();
+    fetchotherPrices();
   });
 
   const modal = document.getElementById("graphModal");
