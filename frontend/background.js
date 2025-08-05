@@ -120,8 +120,8 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     case "fetchCompetitivePrices":
       fetchWithIapToken("getProductData", payload, sendResponse);
       return true;
-    case "fetchCRPPrices":
-      fetchWithIapToken("getCRPPrices", payload, sendResponse);
+    case "fetchotherPrices":
+      fetchWithIapToken("getotherPrices", payload, sendResponse);
       return true;
     case "fetchPriceHistory":
       fetchWithIapToken("getPriceHistorySales", payload, sendResponse);
